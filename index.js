@@ -44,9 +44,7 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: "10" }).setToken(
-  "MTA4NTk1MjgwNTA0MDI5NTk3Nw.GhxpFB._ViCX8nEPqWmziB2FzctN3u2wewOs0slK51Yj4"
-);
+const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
   try {
@@ -56,10 +54,7 @@ const rest = new REST({ version: "10" }).setToken(
 
     // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(
-      Routes.applicationGuildCommands(
-        "1085952805040295977",
-        "1085954652006269109"
-      ),
+      Routes.applicationGuildCommands(process.env.CLIENT, process.env.GUID),
       { body: commands }
     );
 
@@ -84,6 +79,4 @@ for (const file of commandFiles) {
   }
 }
 
-client.login(
-  "MTA4NTk1MjgwNTA0MDI5NTk3Nw.GhxpFB._ViCX8nEPqWmziB2FzctN3u2wewOs0slK51Yj4"
-);
+client.login(process.env.TOKEN);
