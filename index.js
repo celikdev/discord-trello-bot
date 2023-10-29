@@ -5,6 +5,7 @@ const {
   Collection,
   REST,
   Routes,
+  Message,
 } = require("discord.js");
 const dotenv = require("dotenv").config();
 
@@ -12,7 +13,11 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 const eventsPath = path.join(__dirname, "events");
