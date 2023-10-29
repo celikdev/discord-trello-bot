@@ -42,7 +42,7 @@ const commandFiles = fs
   .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js"));
 
-const commands = [];
+const commands = ["track"];
 
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);

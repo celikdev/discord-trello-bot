@@ -16,24 +16,17 @@ module.exports = {
       ],
     });
 
-    client.on("messageCreate", (message) => {
-      if (message.author.bot) return;
-      if (message.channel.id != "983105466127220766") return;
-      var extension = message.attachments.map((attachment) =>
-        attachment.name.split(".").pop()
+    const guild = client.guilds.cache.get(process.env.GUID);
+    if (guild) {
+      guild.commands.set(
+        [...client.commands.values()].map((command) => command.data)
       );
-      if (extension != "stl") {
-        message
-          .reply("Buraya Sadece STL Dosyası Atıyoruz Kardeşim!")
-          .then((msg) => {
-            setTimeout(() => {
-              msg.delete();
-              message.delete();
-            }, 3000);
-          });
-      } else {
-        return;
-      }
-    });
+    } else {
+      client.application.commands.set(
+        [...client.commands.values()].map((command) => command.data)
+      ); // Bu, komutu tüm sunucularda kullanılabilir hale getirir.
+    }
+
+    client.on("messageCreate", (message) => {});
   },
 };
